@@ -17,15 +17,23 @@ export function UsersTable({
             <th className="p-2 text-sm text-left">Email</th>
             <th className="p-2 text-sm text-left">Actions</th>
           </thead>
-          <tbody className="divide-y divide-gray-100 ">
-            {!pending && users?.map((user) => <UserTableRow user={user} />)}
+          <tbody
+            className="divide-y divide-gray-100 "
+            data-cy="user-table-body"
+          >
+            {!pending &&
+              users?.map((user) => <UserTableRow user={user} key={user.id} />)}
           </tbody>
         </table>
         {pending ? (
-          <div className="text-lg text-gray-700 text-center">Loading!</div>
+          <div className="text-lg text-gray-700 text-center" data-cy="loading">
+            Loading!
+          </div>
         ) : undefined}
         {users?.length === 0 && !pending ? (
-          <div className="text-lg text-gray-700 text-center">No Data!</div>
+          <div className="text-lg text-gray-700 text-center" data-cy="no-data">
+            No Data!
+          </div>
         ) : undefined}
       </div>
     </div>

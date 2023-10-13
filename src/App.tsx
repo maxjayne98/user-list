@@ -25,6 +25,7 @@ function App() {
           name="userName"
           label="username"
           onChange={inputOnChange}
+          data-cy="username-input"
         />
 
         <Input
@@ -32,11 +33,13 @@ function App() {
           name="email"
           label="email"
           onChange={inputOnChange}
+          data-cy="email-input"
         />
         <button
           onClick={fetchUsers}
           type="button"
           className="bg-gray-400 text-white rounded px-1"
+          data-cy="reset-btn"
         >
           reset
         </button>

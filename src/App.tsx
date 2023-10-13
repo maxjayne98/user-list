@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className="lg:px-12 max-w-3xl mx-auto">
-      <form className="flex gap-4 py-2 flex-wrap">
+      <form className="flex gap-4 py-2 flex-wrap items-end">
         <Input
           type="text"
           name="userName"
@@ -33,6 +33,12 @@ function App() {
           label="email"
           onChange={inputOnChange}
         />
+        <button
+          onClick={fetchUsers}
+          className="bg-gray-400 text-white rounded px-1"
+        >
+          reset
+        </button>
       </form>
       <UsersTable users={filteredData} pending={users.pending} />
     </div>

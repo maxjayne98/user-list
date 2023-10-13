@@ -13,6 +13,7 @@ const UserContext = createContext<{
   users: StateType;
   fetchUsers: () => Promise<void>;
   deleteUser: (id: number) => void;
+  updateUser: (user: User) => void;
   dispatch: Dispatch<ACTIONTYPE>;
 } | null>(null);
 
@@ -70,6 +71,23 @@ async function deleteUser(
   dispatch({ type: "SET_USERS", payload: result });
 }
 
+async function updateUser(
+  dispatch: Dispatch<ACTIONTYPE>,
+  data: Array<User> | null,
+  userNewData: User
+) {
+  if (!data) return;
+  const result = [];
+
+  for (let index = 0; index < data?.length; index++) {
+    const user = data[index];
+    if (userNewData.id === user.id) result.push(userNewData);
+    else result.push(user);
+  }
+
+  dispatch({ type: "SET_USERS", payload: result });
+}
+
 function UsersProvider({ children }: Props): JSX.Element {
   const [users, dispatch] = useReducer(userReducer, initialState);
   const value = {
@@ -77,6 +95,7 @@ function UsersProvider({ children }: Props): JSX.Element {
     dispatch,
     fetchUsers: () => fetchUsers(dispatch),
     deleteUser: (id: number) => deleteUser(dispatch, users.data, id),
+    updateUser: (user: User) => updateUser(dispatch, users.data, user),
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

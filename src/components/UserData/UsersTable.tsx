@@ -9,12 +9,13 @@ export function UsersTable({
   pending: boolean;
 }) {
   return (
-    <div className="w-full relative mx-auto bg-white rounded-sm ">
-      <div className="overflow-x-auto scrollbar-thin  ">
+    <div className="w-full relative mx-auto bg-white rounded ">
+      <div className="overflow-x-auto scrollbar-thin rounded  ">
         <table className="w-full text-xs table-auto ">
           <thead className="text-gray-100 bg-blue-500 rounded-t-lg bg-secondary-500 ">
-            <th className="p-2 text-sm text-bold">Username</th>
-            <th className="p-2 text-sm">Email</th>
+            <th className="p-2 text-sm text-bold text-left">Username</th>
+            <th className="p-2 text-sm text-left">Email</th>
+            <th className="p-2 text-sm text-left">Actions</th>
           </thead>
           <tbody className="divide-y divide-gray-100 ">
             {users?.map((user) => (

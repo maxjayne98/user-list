@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useUsers } from "@/store/usersContext";
 import { useUserFilter } from "@/hooks/useUserFilter";
+// import DeleteIcon from "@/components/Icons/DeleteIcon.tsx";
+import { UsersTable } from "@/components/UserData/UsersTable";
 
 function App() {
   const { users, fetchUsers, deleteUser } = useUsers();
@@ -18,31 +20,20 @@ function App() {
     fetchUsers();
   }, []);
 
-  if (users.pending) return <div>loading!</div>;
-  if (!filteredData?.length) return <div>no data!</div>;
   return (
-    <>
-      <form className="flex gap-4">
-        <span>username</span>
-        <input type="text" name="userName" onChange={inputOnChange} />
-        <span>email</span>
-        <input type="text" name="email" onChange={inputOnChange} />
+    <div className="lg:px-12 max-w-3xl mx-auto">
+      <form className="flex gap-4 py-2 flex-wrap">
+        <div>
+          <p>username</p>
+          <input type="text" name="userName" onChange={inputOnChange} />
+        </div>
+        <div>
+          <p>email</p>
+          <input type="text" name="email" onChange={inputOnChange} />
+        </div>
       </form>
-      <div>
-        {filteredData?.map(({ username, email, id }) => (
-          <div className="flex gap-4" key={username}>
-            <span>{username}</span>
-            <span>{email}</span>
-            <button
-              onClick={() => deleteUserButtonOnClick(id)}
-              className="text-red-500 text-xs inline-flex items-center justify-center"
-            >
-              X
-            </button>
-          </div>
-        ))}
-      </div>
-    </>
+      <UsersTable users={filteredData} loading={users.pending} />
+    </div>
   );
 }
 

@@ -12,6 +12,7 @@ type ACTIONTYPE =
 const UserContext = createContext<{
   users: StateType;
   fetchUsers: () => Promise<void>;
+  deleteUser: (id: number) => void;
   dispatch: Dispatch<ACTIONTYPE>;
 } | null>(null);
 
@@ -46,12 +47,27 @@ async function fetchUsers(dispatch: Dispatch<ACTIONTYPE>) {
   try {
     const payload = await getUsers();
     dispatch({ type: "SET_USERS", payload });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("fetchUser ~ error", error);
   } finally {
     dispatch({ type: "UPDATE_REQUEST_STATUS", payload: false });
   }
+}
+
+async function deleteUser(
+  dispatch: Dispatch<ACTIONTYPE>,
+  data: Array<User> | null,
+  userId: number
+) {
+  if (!data) return;
+
+  const result = [];
+
+  for (let index = 0; index < data?.length; index++) {
+    const user = data[index];
+    if (userId !== user.id) result.push(user);
+  }
+  dispatch({ type: "SET_USERS", payload: result });
 }
 
 function UsersProvider({ children }: Props): JSX.Element {
@@ -60,7 +76,9 @@ function UsersProvider({ children }: Props): JSX.Element {
     users,
     dispatch,
     fetchUsers: () => fetchUsers(dispatch),
+    deleteUser: (id: number) => deleteUser(dispatch, users.data, id),
   };
+
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 

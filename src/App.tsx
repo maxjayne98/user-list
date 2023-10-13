@@ -35,6 +35,7 @@ function App() {
         />
         <button
           onClick={fetchUsers}
+          type="button"
           className="bg-gray-400 text-white rounded px-1"
         >
           reset

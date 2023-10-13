@@ -2,11 +2,11 @@ describe("User table tests", () => {
   beforeEach(() => {
     cy.visit("/");
   });
-  it("Loading should be visible at first render", () => {
+  it("1.Loading should be visible at first render", () => {
     cy.get('[data-cy="loading"]').should("be.visible");
   });
 
-  it("No data should be visible after removing all elements", () => {
+  it("2.No data should be visible after removing all elements", () => {
     cy.get('[data-cy="delete-user-btn-1"]');
     for (let index = 1; index < 11; index++) {
       cy.get(`[data-cy="delete-user-btn-${index}"]`).click();
@@ -15,7 +15,7 @@ describe("User table tests", () => {
     cy.get('[data-cy="no-data"]').should("be.visible");
   });
 
-  it("Users should be reset to default after removing all users and pressing reset btn", () => {
+  it("3.Users should be reset to default after removing all users and pressing reset btn", () => {
     cy.get('[data-cy="delete-user-btn-1"]');
     for (let index = 1; index < 11; index++) {
       cy.get(`[data-cy="delete-user-btn-${index}"]`).click();
@@ -30,7 +30,7 @@ describe("User table tests", () => {
     }
   });
 
-  it("Filter by email and check count of rows", () => {
+  it("4.Filter by email and check count of rows", () => {
     cy.get('[data-cy="user-table-row-1"]')
       .find('[data-cy="user-row-value"]')
       .eq(1)
@@ -44,7 +44,7 @@ describe("User table tests", () => {
       .should("have.length", 2);
   });
 
-  it("Filter by email and check count of rows then press reset btn and check result ", () => {
+  it("5.Filter by email and check count of rows then press reset btn and check result ", () => {
     cy.get('[data-cy="user-table-row-1"]')
       .find('[data-cy="user-row-value"]')
       .eq(1)
@@ -66,7 +66,7 @@ describe("User table tests", () => {
     }
   });
 
-  it("Edit user email name and Filter by email and check count of rows", () => {
+  it("6.Edit user email name and Filter by email and check count of rows", () => {
     const row = cy.get('[data-cy="user-table-row-1"] ');
     const newMail = "Mohammad@gmail.com";
 

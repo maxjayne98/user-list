@@ -13,6 +13,7 @@ export function useUserFilter(users: Array<User> | null) {
     const result = [];
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
+      console.log(filters.userName, " ==== ", user.username);
       if (
         user.email.toLowerCase().includes(filters.email.toLowerCase()) &&
         user.username.toLowerCase().includes(filters.userName.toLowerCase())

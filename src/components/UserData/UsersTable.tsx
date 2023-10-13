@@ -14,6 +14,7 @@ export function UsersTable({
         <table className="w-full text-xs table-auto ">
           <thead className="text-gray-100 bg-blue-500 rounded-t-lg bg-secondary-500 ">
             <th className="p-2 text-sm text-bold text-left">Username</th>
+            <th className="p-2 text-sm text-bold text-left">Name</th>
             <th className="p-2 text-sm text-left">Email</th>
             <th className="p-2 text-sm text-left">Actions</th>
           </thead>

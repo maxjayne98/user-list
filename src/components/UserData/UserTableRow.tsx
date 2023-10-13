@@ -24,6 +24,9 @@ export function UserTableRow({ user }: { user: User }) {
       key={useId()}
     >
       <td className="p-2 whitespace-nowrap">
+        <div className="text-primary-500 text-left">{user.username}</div>
+      </td>
+      <td className="p-2 whitespace-nowrap">
         <EditableInput value={user.name} onUpdate={userNameOnUpdate} />
       </td>
       <td className="p-2 whitespace-nowrap">
